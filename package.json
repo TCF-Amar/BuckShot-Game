@@ -1,38 +1,25 @@
 {
-  "name": "buckshot",
-  "type": "module",
+  "name": "dead-signal",
+  "version": "1.0.0",
+  "description": "Real-Time Multiplayer Horror Strategy Game",
   "private": true,
+  "type": "module",
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"red.bold,cyan.bold\" \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix server run build && npm --prefix client run build",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "test": "npm --prefix server run test",
+    "test:watch": "npm --prefix server run test:watch",
+    "start:server": "npm --prefix server start"
   },
-  "dependencies": {
-    "@nuxt/ui": "4.11.3",
-    "@nuxtjs/tailwindcss": "6.14.0",
-    "@tiptap/core": "^3",
-    "@tiptap/extension-bubble-menu": "^3",
-    "@tiptap/extension-code": "^3",
-    "@tiptap/extension-collaboration": "^3",
-    "@tiptap/extension-drag-handle": "^3",
-    "@tiptap/extension-drag-handle-vue-3": "^3",
-    "@tiptap/extension-floating-menu": "^3",
-    "@tiptap/extension-horizontal-rule": "^3",
-    "@tiptap/extension-image": "^3",
-    "@tiptap/extension-mention": "^3",
-    "@tiptap/extension-node-range": "^3",
-    "@tiptap/extension-placeholder": "^3",
-    "@tiptap/markdown": "^3",
-    "@tiptap/pm": "^3",
-    "@tiptap/starter-kit": "^3",
-    "@tiptap/suggestion": "^3",
-    "@tiptap/vue-3": "^3",
-    "nuxt": "^4.6.0",
-    "tailwindcss": "^4",
-    "typescript": "^7.0.2",
-    "vue": "^3.5.43",
-    "vue-router": "^5.3.1"
+  "devDependencies": {
+    "concurrently": "^9.1.0"
   }
 }
