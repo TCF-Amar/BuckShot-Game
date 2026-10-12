@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #060707;
+    --surface-dark: #0f1011;
+    --surface-elevated: #161819;
+    --accent-red: #A71922;
+    --accent-red-bright: #D33B42;
+    --text-primary: #E9E7E2;
+    --text-muted: #8b8e8b;
+    --border-subtle: #272a2a;
+  }
+
+  html, body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  #__nuxt {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Atmospheric vignette & gritty grain */
+.vignette-overlay {
+  background: radial-gradient(circle at 50% 45%, transparent 30%, rgba(0, 0, 0, 0.92) 100%);
+  pointer-events: none;
+}
+
+.horror-scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.35) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Red blood splatter vignette on damage */
+.blood-vignette {
+  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(167, 25, 34, 0.45) 85%, rgba(130, 10, 18, 0.8) 100%);
+  pointer-events: none;
+  animation: bloodPulse 2s ease-out forwards;
+}
+
+@keyframes bloodPulse {
+  0% { opacity: 0; transform: scale(1.05); }
+  15% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; }
+}
+
+/* Dramatic Screen Shake */
+@keyframes screenShake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-10px, -12px) rotate(-1.5deg); }
+  20% { transform: translate(12px, 8px) rotate(1deg); }
+  30% { transform: translate(-8px, 6px) rotate(-0.8deg); }
+  40% { transform: translate(6px, -4px) rotate(0.5deg); }
+  60% { transform: translate(-4px, 2px) rotate(-0.3deg); }
+  80% { transform: translate(2px, -1px); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.animate-screen-shake {
+  animation: screenShake 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Overhead swinging industrial bulb */
+@keyframes swingLight {
+  0%, 100% {
+    transform: rotate(-3deg) translate(-10px, 0);
+  }
+  50% {
+    transform: rotate(3deg) translate(10px, 0);
+  }
+}
+
+.swinging-light {
+  transform-origin: top center;
+  animation: swingLight 9s ease-in-out infinite;
+}
+
+/* Light beam cone */
+.light-cone {
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 235, 190, 0.09) 0%, rgba(200, 100, 40, 0.03) 40%, transparent 75%);
+  pointer-events: none;
+}
+
+/* 3D Chamber Table Perspective */
+.chamber-viewport {
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
+}
+
+.table-surface {
+  transform: rotateX(24deg);
+  transform-origin: 50% 80%;
+  background: 
+    radial-gradient(circle at 50% 40%, rgba(45, 48, 50, 0.6) 0%, rgba(14, 15, 16, 0.98) 75%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 8px);
+  box-shadow: 
+    inset 0 20px 40px rgba(0,0,0,0.9),
+    0 30px 60px rgba(0,0,0,0.95);
+}
+
+/* CRT Screen Effect for Vitals Monitor */
+.crt-screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #030a06;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.8), 0 0 12px rgba(16, 185, 129, 0.15);
+}
+
+.crt-screen::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.crt-screen::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Phosphor Glow */
+.phosphor-green {
+  color: #34d399;
+  text-shadow: 0 0 8px rgba(52, 211, 153, 0.7), 0 0 15px rgba(52, 211, 153, 0.3);
+}
+
+.phosphor-red {
+  color: #f87171;
+  text-shadow: 0 0 8px rgba(248, 113, 113, 0.8), 0 0 18px rgba(239, 68, 68, 0.4);
+}
+
+.phosphor-amber {
+  color: #fbbf24;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.7);
+}
+
+/* Shotgun Aiming Transitions */
+.shotgun-model {
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1), filter 0.3s ease;
+}
+
+.aim-opponent {
+  transform: translateY(-40px) scale(1.08) rotate(-4deg);
+  filter: drop-shadow(0 15px 25px rgba(167, 25, 34, 0.4));
+}
+
+.aim-self {
+  transform: translateY(35px) scale(1.15) rotate(180deg);
+  filter: drop-shadow(0 -15px 25px rgba(245, 158, 11, 0.4));
+}
+
+/* Muzzle flash burst */
+@keyframes muzzleFlash {
+  0% { opacity: 0; transform: scale(0.5); }
+  20% { opacity: 1; transform: scale(1.8); }
+  100% { opacity: 0; transform: scale(2.4); }
+}
+
+.muzzle-flash-anim {
+  animation: muzzleFlash 0.28s ease-out forwards;
+}
+
+/* Laser sight dot */
+@keyframes laserPulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.laser-dot {
+  box-shadow: 0 0 10px #ff0022, 0 0 20px #ff0022;
+  animation: laserPulse 1.2s infinite ease-in-out;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #060707;
+}
+::-webkit-scrollbar-thumb {
+  background: #272a2a;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A71922;
+}
